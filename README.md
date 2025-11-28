@@ -11,20 +11,6 @@ Terraform deployment using the Kubernetes provider
 
 The goal is to provide a minimal, clean, and reproducible setup without unnecessary dependencies.
 
-Repository Structure
-.
-├── app/
-│   └── main.go               # Simple Go HTTP server
-├── Dockerfile                # Multi-stage Docker build
-├── k8s/
-│   ├── deployment.yaml       # Kubernetes Deployment
-│   └── service.yaml          # Kubernetes Service
-├── terraform/
-│   ├── main.tf               # Terraform config using Kubernetes provider
-│   └── variables.tf
-└── .github/workflows/
-    └── ci.yaml               # CI pipeline to build & push Docker image
-
 1️. Simple HTTP Server
 
 A minimal Go application that returns "Hello, World!" at /.
