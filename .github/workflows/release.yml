@@ -30,6 +30,7 @@ jobs:
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
       - name: Build and Push Docker image
+        id: buildpush
         uses: docker/build-push-action@v6
         with:
           context: .
@@ -38,3 +39,15 @@ jobs:
           tags: |
             ${{ secrets.DOCKERHUB_USERNAME }}/hello-world-server:latest
             ${{ secrets.DOCKERHUB_USERNAME }}/hello-world-server:${{ github.sha }}
+
+      - name: Export image tag (commit SHA)
+        run: echo "IMAGE_TAG=${GITHUB_SHA}" >> $GITHUB_ENV
+
+      - name: Upload image tag artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: image_tag
+          path: ./image_tag.txt
+
+      - name: Create image tag file
+        run: echo "${GITHUB_SHA}" > image_tag.txt
